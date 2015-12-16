@@ -2,12 +2,17 @@ language: python
 python:
   - "3.4"
   - "3.5"
+sudo: required
 addons:
   apt:
     packages:
-      - nodejs-5.1.1
-      - git
+      - ruby
+before_install:
+  - sudo add-apt-repository ppa:chris-lea/node.js
+  - sudo apt-get update
+  - sudo apt-get install nodejs-5.1.1
 install:
   - npm install
+  - gem install -u sass
   - grunt install
 script: python -m unittest test
