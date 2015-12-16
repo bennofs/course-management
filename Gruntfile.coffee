@@ -91,6 +91,7 @@ module.exports = (grunt) ->
       throw new TypeError('expected list of objects or strings, or object')
 
   grunt.registerTask 'install-virtualenv', 'Install a python virtual environment', ->
+    Object.getOwnPropertyNames(cp)
     cp.spawnSync 'python3', ['-m', 'pip', 'install', 'virtualenv']
     cp.spawnSync 'python3', ['-m', 'virtualenv', PYTHON_ENV_FOLDER]
 
@@ -129,11 +130,12 @@ module.exports = (grunt) ->
         if pendingCount == 0
           callback(success)
 
-  grunt.registerTask 'install-dependencies', ['npm-install', 'pip-install', 'bower-install', 'init-submodules']
+  grunt.registerTask 'install-dependencies', ['npm-install', 'install-virtualenv', 'pip-install', 'bower-install',
+    'init-submodules']
 
   grunt.registerTask 'build', ['sass']
 
-  grunt.registerTask 'install', ['install-virtualenv', 'install-dependencies', 'build', 'init-db']
+  grunt.registerTask 'install', ['install-dependencies', 'build', 'init-db']
 
 
   grunt.registerTask 'pip-install', 'Get remaining dependencies', ->
