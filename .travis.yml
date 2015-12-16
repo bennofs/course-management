@@ -8,7 +8,7 @@ addons:
     packages:
       - ruby
 before_install:
-  - sudo add-apt-repository ppa:chris-lea/node.js
+  - sudo add-apt-repository -y ppa:chris-lea/node.js
   - sudo apt-get update
   - sudo apt-get install nodejs-5.1.1
 install:
